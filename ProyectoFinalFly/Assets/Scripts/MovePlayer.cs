@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    private float rotationAxisX = 0f;
     private float horizontalInput;
     private float verticalInput;
-    [SerializeField][Range(5f, 10f)] private float speed = 5f;
+    private float rotationAxisX;
+
+        [SerializeField][Range(5f, 50f)] private float speedForward = 5f;
+    [SerializeField][Range(5f, 50f)] private float speed = 5f;
+    public GameObject cuerpoAvionHijo;
+    [SerializeField][Range(10f, 1000f)] private float turnSpeed = 10f;
+
+
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        cuerpoAvionHijo = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -29,6 +36,8 @@ public class MovePlayer : MonoBehaviour
 
     private void MovementPlayer()
     {
+        transform.Translate(Vector3.forward*speedForward*Time.deltaTime);
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -39,11 +48,15 @@ public class MovePlayer : MonoBehaviour
 
     public void RotatePlayer()
     {
+        rotationAxisX = Input.GetAxis("Lateral");
 
+        cuerpoAvionHijo.transform.Rotate
+           (Vector3.forward * rotationAxisX * -turnSpeed * Time.deltaTime);
 
-        rotationAxisX -= Input.GetAxis("Mouse X");
+       /* if (rotationAxisX == 0)
+        {
+            cuerpoAvionHijo.transform.rotation = Quaternion.Slerp(cuerpoAvionHijo.transform.rotation, transform.rotation, 0.05f);
+        }*/
 
-        Quaternion newRotation = Quaternion.Euler(0, 0, rotationAxisX);
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, 10f * Time.deltaTime);
     }
 }
