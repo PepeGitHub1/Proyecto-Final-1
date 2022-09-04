@@ -9,7 +9,7 @@ public class MovePlayer : MonoBehaviour
     private float rotationAxisX;
 
         [SerializeField][Range(5f, 50f)] private float speedForward = 5f;
-    [SerializeField][Range(5f, 50f)] private float speed = 5f;
+    [SerializeField][Range(5f, 50f)] private float speedHorVer = 5f;
     public GameObject cuerpoAvionHijo;
     [SerializeField][Range(10f, 1000f)] private float turnSpeed = 10f;
 
@@ -41,8 +41,8 @@ public class MovePlayer : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
-        transform.Translate(Vector3.up * verticalInput * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * horizontalInput * speedHorVer * Time.deltaTime);
+        transform.Translate(Vector3.up * verticalInput * speedHorVer * Time.deltaTime);
 
     }
 
@@ -53,10 +53,11 @@ public class MovePlayer : MonoBehaviour
         cuerpoAvionHijo.transform.Rotate
            (Vector3.forward * rotationAxisX * -turnSpeed * Time.deltaTime);
 
-       /* if (rotationAxisX == 0)
+        if (rotationAxisX == 0)
         {
             cuerpoAvionHijo.transform.rotation = Quaternion.Slerp(cuerpoAvionHijo.transform.rotation, transform.rotation, 0.05f);
-        }*/
+        }
 
     }
+    
 }
