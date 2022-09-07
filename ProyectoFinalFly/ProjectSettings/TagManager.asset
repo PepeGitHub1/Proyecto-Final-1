@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WayPoint
   - WayPointSuper
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -18,5 +18,12 @@ public class PlayerCollition : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.Score += 5;
         }
+
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+          
+            Destroy(gameObject);
+
+        }
     }
 }
